@@ -3,7 +3,7 @@ package org.csystem.app.time;
 import com.karandev.io.util.console.Console;
 import org.csystem.util.numeric.NumberUtil;
 
-public class StopWatch {
+public class PrimitiveStopWatch {
     public static void main(String[] args)
     {
         currentTimeMillis();
