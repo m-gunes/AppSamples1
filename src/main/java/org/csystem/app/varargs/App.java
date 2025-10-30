@@ -1,6 +1,7 @@
 package org.csystem.app.varargs;
 
 import com.karandev.io.util.console.Console;
+import org.csystem.Sample;
 
 public class App {
     public static void main(String[] args)
@@ -16,6 +17,16 @@ public class App {
 
 
         Util.printInts("Values", 10, 20, 30);
+
+
+        Util.foo(10);
+        Util.foo(10, 20);
+
+
+        ///// Interview question
+        Question.foo(10); // hangisi cagirilacak?
+        // long parametreli secilir cunku temel turden.
+        // eger foo(int a) olsaydi, o cagirilirdi.
     }
 }
 
@@ -38,7 +49,35 @@ class Util {
         Console.writeLine();
     }
 
+
 //    public static void printInts(int[]ints) // overload edilemiyorlar
 //    {
 //    }
+    public static void foo(int a)
+    {
+        Console.writeLine("foo, int");
+    }
+
+    public static void foo(int...a)
+    {
+        Console.writeLine("foo, int...");
+    }
+
+//    public static void foo(int[] a) // Error: 'foo(int[])' is already defined
+//    {
+//        Console.writeLine("foo, int...");
+//    }
+}
+
+class Question {
+
+    public static void foo(long a)
+    {
+        Console.writeLine("foo, long");
+    }
+
+    public static void foo(int...a)
+    {
+        Console.writeLine("foo, int...");
+    }
 }
