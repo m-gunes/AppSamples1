@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 public class BigDecimalSamples {
-    public static void main(String[] args)
+    public static void run()
     {
         divideCompareTo();
     }

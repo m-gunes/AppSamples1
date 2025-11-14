@@ -8,7 +8,7 @@ import org.csystem.util.numeric.NumberUtil;
 import java.util.concurrent.TimeUnit;
 
 public class ApacheStopWatch {
-    public static void main(String[] args)
+    public static void run()
     {
         var stopWatch = new StopWatch();
         stopWatch.start();

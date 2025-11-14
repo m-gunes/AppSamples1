@@ -7,7 +7,7 @@ import org.csystem.util.numeric.NumberUtil;
 import java.util.concurrent.TimeUnit;
 
 public class DiagnosticStopWatch {
-    public static void main(String[] args)
+    public static void run()
     {
         var stopWatch = StopWatch.createStarted();
         Console.writeLine(NumberUtil.isPrime(6750161072220585911L) ? "Asal" : "Asal degil");

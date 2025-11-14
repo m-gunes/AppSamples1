@@ -4,7 +4,7 @@ import com.karandev.io.util.console.Console;
 import org.csystem.Sample;
 
 public class App {
-    public static void main(String[] args)
+    public static void run()
     {
         Util.printInts(10, 20, 30);
         Util.printInts(new int[]{10, 20, 30}); // derleyici bu kodu uretiyor

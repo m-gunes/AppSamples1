@@ -4,7 +4,7 @@ import com.karandev.io.util.console.Console;
 import org.csystem.util.numeric.NumberUtil;
 
 public class PrimitiveStopWatch {
-    public static void main(String[] args)
+    public static void run()
     {
         currentTimeMillis();
     }
