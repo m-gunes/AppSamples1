@@ -3,12 +3,40 @@ package org.csystem.app.localdatetime;
 import com.karandev.io.util.console.Console;
 
 import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 public class LocalDateTimeApp {
     public static void run()
     {
-        chronoUnitEx();
+        parseFormatter();
+    }
+
+    public static void parseFormatter()
+    {
+        try {
+            var formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            var date = LocalDate.parse(Console.readLine("Input date text:"), formatter);
+            Console.writeLine(date);
+        }
+        catch (DateTimeException e) {
+            Console.Error.writeLine("Invalid format for date");
+        }
+    }
+
+    public static void patternEx()
+    {
+        var formatter = DateTimeFormatter.ofPattern("dd-MM-yyy-HH-mm-s-n");
+        var now = LocalDateTime.now();
+
+        Console.writeLine(now);
+        Console.writeLine(now.format(formatter));
+    }
+
+    public static void printEntOftheCurrentMonth()
+    {
+        var endOfTheCurrentMonth = LocalDate.now().plusMonths(1).withDayOfMonth(1).minusDays(1);
+        Console.writeLine(endOfTheCurrentMonth);
     }
 
     public static void chronoUnitEx()
