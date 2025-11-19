@@ -5,11 +5,37 @@ import com.karandev.io.util.console.Console;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalAdjusters;
 
 public class LocalDateTimeApp {
     public static void run()
     {
-        parseFormatter();
+        printCartExpiryStatus();
+    }
+
+    public static void printCartExpiryStatus()
+    {
+        while (true) {
+            var expiryMonth = Console.readInt("Input expiry month:");
+            var expiryYear = Console.readInt("Input expiry year:");
+            var expiryDate = YearMonth.of(expiryYear, expiryMonth).atEndOfMonth(); // Great!!!
+
+            expiryDate = expiryDate.withDayOfMonth(expiryDate.lengthOfMonth());
+            Console.writeLine(expiryDate);
+            Console.writeLine(LocalDate.now().isAfter(expiryDate) ? "Card expired" : "Card is available");
+        }
+    }
+
+    public static void printCartExpiryStatus1()
+    {
+        while (true) {
+            var expiryMonth = Console.readInt("Input expiry month:");
+            var expiryYear = Console.readInt("Input expiry year:");
+            var expiryDate = LocalDate.of(expiryYear, expiryMonth, 1);
+            expiryDate = expiryDate.withDayOfMonth(expiryDate.lengthOfMonth());
+            Console.writeLine(expiryDate);
+            Console.writeLine(LocalDate.now().isAfter(expiryDate) ? "Card expired" : "Card is available");
+        }
     }
 
     public static void parseFormatter()
@@ -33,10 +59,16 @@ public class LocalDateTimeApp {
         Console.writeLine(now.format(formatter));
     }
 
-    public static void printEntOftheCurrentMonth()
+    public static void printEndOfMonthEx()
     {
-        var endOfTheCurrentMonth = LocalDate.now().plusMonths(1).withDayOfMonth(1).minusDays(1);
-        Console.writeLine(endOfTheCurrentMonth);
+//        var endOfTheCurrentMonth = LocalDate.now().plusMonths(1).withDayOfMonth(1).minusDays(1);
+        var today = LocalDate.now();
+        var endOfMonth1 = today.withDayOfMonth(1).plusMonths(1).minusDays(1);
+        var endOfMonth2 = today.with(TemporalAdjusters.lastDayOfMonth());
+        var endOfMonth3 = today.withDayOfMonth(today.lengthOfMonth()); // en az maliyetli olan budur!
+        Console.writeLine(endOfMonth1);
+        Console.writeLine(endOfMonth2);
+        Console.writeLine(endOfMonth3);
     }
 
     public static void chronoUnitEx()
