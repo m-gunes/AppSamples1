@@ -1,11 +1,10 @@
 package org.csystem.app;
 
-import org.csystem.app.localdatetime.BirthdayApp;
-import org.csystem.app.localdatetime.LocalDateTimeApp;
+import org.csystem.app.questions.fighter.FighterApp;
 
 class Application {
     public static void run(String[] args)
     {
-        LocalDateTimeApp.run();
+        FighterApp.run();
     }
 }
