@@ -2,15 +2,14 @@ package org.csystem.app.innerclasses;
 
 import com.karandev.io.util.console.Console;
 
-public class InnerClassesApp {
+public class ThisExpression {
     public static void run()
     {
         var a = new A(10);
-        var b = a.new B();
+        var b = a.new B(); // Byte code -> new A$B(a)
         b.foo();
     }
 }
-
 
 class A {
     private int m_x;
