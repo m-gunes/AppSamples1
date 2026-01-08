@@ -1,4 +1,4 @@
-package org.csystem.app.prompt;
+package org.csystem.app.nestedclass.prompt;
 
 import com.karandev.io.util.console.Console;
 
