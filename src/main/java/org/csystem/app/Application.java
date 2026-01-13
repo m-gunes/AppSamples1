@@ -9,11 +9,11 @@ import java.util.concurrent.TimeUnit;
 class Application {
     public static void run(String[] args)
     {
-//        CountDownScheduler countDown = new CountDownScheduler(10000, 1000){
-        CountDownScheduler countDown = new CountDownScheduler(10, 1, TimeUnit.SECONDS){
+        CountDownScheduler countDown = new CountDownScheduler(10000, 1000){
+//        CountDownScheduler countDown = new CountDownScheduler(10, 1, TimeUnit.SECONDS){
             public void onTick(long remainingMilliseconds)
             {
-                Console.writeLine(remainingMilliseconds);
+                Console.writeLine((10000 - remainingMilliseconds));
             }
             public void onFinish()
             {
