@@ -29,7 +29,7 @@ public class Alarm {
     private final LocalDateTime m_dateTime;
     private final Timer m_timer;
 
-    private TimerTask createTimerTask(TimerTask task)
+    private TimerTask createTimerTask(Runnable task)
     {
         return new TimerTask() {
 
@@ -62,7 +62,7 @@ public class Alarm {
         this(date.atTime(0,0));
     }
 
-    public void start(TimerTask task)
+    public void start(Runnable task)
     {
         m_timer.scheduleAtFixedRate(createTimerTask(task), 0, 1000);
     }
