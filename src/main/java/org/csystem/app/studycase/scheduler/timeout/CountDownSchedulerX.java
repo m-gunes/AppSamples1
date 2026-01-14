@@ -27,14 +27,14 @@ import java.util.concurrent.TimeUnit;
  * }.startX();
  */
 
-public abstract class CountDownSchedulerEx extends CountDownScheduler {
+public abstract class CountDownSchedulerX extends CountDownScheduler {
 
-    protected CountDownSchedulerEx(long durationInFuture, long countDownInterval, TimeUnit timeUnit)
+    protected CountDownSchedulerX(long durationInFuture, long countDownInterval, TimeUnit timeUnit)
     {
         this(timeUnit.toMillis(durationInFuture), timeUnit.toMillis(countDownInterval));
     }
 
-    protected CountDownSchedulerEx(long millisInFuture, long countDownInterval)
+    protected CountDownSchedulerX(long millisInFuture, long countDownInterval)
     {
         super(millisInFuture, countDownInterval);
     }
@@ -43,6 +43,7 @@ public abstract class CountDownSchedulerEx extends CountDownScheduler {
 
     public void startX()
     {
-        throw new UnsupportedOperationException("Not yet implemented");
+        onStart();
+        start();
     }
 }

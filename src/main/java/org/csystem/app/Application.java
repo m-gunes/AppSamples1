@@ -24,3 +24,50 @@ class Application {
         countDown.start();
     }
 }
+
+
+
+class A implements IX {
+}
+
+abstract class B implements IX { //error
+//...
+}
+ class C implements IX, IY {
+    public void foo()
+    {
+//...
+    }
+    public void bar()
+    {
+//...
+    }
+
+     @Override
+     public void tar()
+     {
+
+     }
+ }
+
+class D implements IX, IY {
+    public void foo()
+    {
+//...
+    }
+    public void bar()
+    {
+//...
+    }
+    public void tar()
+    {
+//...
+    }
+}
+interface IX {
+    void foo();
+}
+interface IY {
+    void bar();
+    void tar();
+}
