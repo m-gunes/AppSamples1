@@ -1,10 +1,10 @@
 package org.csystem.app;
 
-import org.csystem.app.lambda.LambdaExpressionSamples;
+import org.csystem.app.methodreferance.FunctionInterfaces;
 
 class Application {
     public static void run(String[] args)
     {
-        LambdaExpressionSamples.run();
+        FunctionInterfaces.run();
     }
 }
