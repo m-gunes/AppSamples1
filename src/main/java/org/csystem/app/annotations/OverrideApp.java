@@ -66,7 +66,7 @@ class XFactory {
 }
 
 class X {
-    public void foo(int a, long b)
+    public void foo(int a, int b) // if I changed as foo(int a, long b), it would give an error in @Override annotation where its defined. It will say; Method does not override method from its superclass
     {
         Console.writeLine("X -> a = %d, b = %d", a, b);
     }
