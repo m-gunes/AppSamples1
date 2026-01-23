@@ -4,9 +4,9 @@ import lombok.extern.log4j.Log4j;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@Log4j
+//@Log4j
 public class Log4jApp {
-//    private static final Logger log = LogManager.getLogger(Log4jApp.class);
+    private static final Logger log = LogManager.getLogger(Log4jApp.class);
 
     public static void run()
     {
