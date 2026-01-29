@@ -4,14 +4,40 @@ import com.karandev.io.util.console.Console;
 import lombok.extern.slf4j.Slf4j;
 import org.csystem.util.string.StringUtil;
 
-import java.lang.reflect.InvocationTargetException;
-
+import java.lang.reflect.*;
 
 @Slf4j
 public class ReflectionApp {
     public static void run()
     {
-        getDeclaredXXX();
+        getFieldDeclaration();
+    }
+
+    public static void getFieldDeclaration()
+    {
+        try {
+            var cls = SingletonLazy.class;
+            var field1 = cls.getDeclaredField("m_value");
+            var field2 = cls.getDeclaredField("ms_instance");
+            Console.writeLine(getFieldDeclarationAsString(field1));
+            Console.writeLine(getFieldDeclarationAsString(field2));
+        } catch (NoSuchFieldException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static String getFieldDeclarationAsString(Field field)
+    {
+        var sb = new StringBuilder();
+        var modifiers = field.getModifiers();
+
+        sb.append(Modifier.toString(modifiers))
+                .append(' ')
+                .append(field.getType().getTypeName())
+                .append(' ')
+                .append(field.getName());
+
+        return sb.toString();
     }
 
     public static void classExpression()
@@ -53,12 +79,14 @@ public class ReflectionApp {
 
     public static void getDeclaredMethods()
     {
-        testSingletonLazy();
+//        testSingletonLazy();
         var cls = SingletonLazy.class;
         var clsMethods = cls.getDeclaredMethods();
 
-        for (var m : clsMethods)
+        for (var m : clsMethods) {
             log.info("Method name: {}", m.getName());
+            log.info("Methot Prototype: {}", getMethodPrototypesAsString(m) );
+        }
     }
 
     private static void testSingletonLazy()
@@ -126,6 +154,33 @@ public class ReflectionApp {
             log.error("Exception occurred: {}, Message: {}", e.getClass().getSimpleName(), e.getMessage());
         }
     }
+
+    private static String joinParams(Class<?>[] classes)
+    {
+        var sb = new StringBuilder();
+        for (var cls : classes)
+            sb.append(cls).append(", ");
+
+        return sb.substring(0, sb.length() - 2);
+    }
+
+    public static String getMethodPrototypesAsString(Method method)
+    {
+        var sb = new StringBuilder();
+        var modifiers = method.getModifiers();
+        var clsParameters = method.getParameterTypes();
+        var params = clsParameters.length != 0 ? joinParams(clsParameters) : "";
+
+        sb.append(Modifier.toString(modifiers))
+                .append(' ')
+                .append(method.getReturnType())
+                .append(' ')
+                .append(method.getName())
+                .append('(')
+                .append(params)
+                .append(')');
+        return sb.toString();
+    }
 }
 
 
@@ -164,6 +219,11 @@ class SingletonLazy {
     public int getValue()
     {
         return m_value;
+    }
+
+    public static int myMethod(long myparam, int yourparam)
+    {
+        return 0;
     }
 }
 
