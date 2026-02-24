@@ -1,0 +1,1 @@
+Bu repository'deki kodlar C ve Sistem Programcıları Derneği tarafından düzenlenen Java Kursu içerisinde kurs eğitmeni Oğuz Karan tarafından yapılan çalışmalardan, kendime aldığım notlardan, ödevlerlerimden ve kendimce yaptığım eklentilerden oluşmaktadır.
