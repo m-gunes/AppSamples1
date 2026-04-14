@@ -1,7 +1,7 @@
 package org.csystem.app.reflection;
 
 import lombok.extern.slf4j.Slf4j;
-import org.csystem.util.reflection.ReflectionUtil;
+import org.csystem.util.reflect.ReflectionUtil;
 
 import java.lang.annotation.*;
 import java.lang.reflect.Method;

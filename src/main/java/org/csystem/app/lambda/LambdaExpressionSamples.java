@@ -13,6 +13,7 @@ public class LambdaExpressionSamples {
 
         Console.writeLine("----------------------");
         var addOperator2 = new IIntBinaryOperator(){
+            @Override
             public int applyAsInt(int a, int b)
             {
                 return a * b * value;
@@ -37,6 +38,7 @@ class AddOperator implements IIntBinaryOperator {
         m_value = value;
     }
 
+    @Override
     public int applyAsInt(int a, int b)
     {
         return a + b + m_value;
