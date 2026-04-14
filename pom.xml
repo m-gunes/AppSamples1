@@ -37,6 +37,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.csystem</groupId>
+            <artifactId>org-csystem-util-collection</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>

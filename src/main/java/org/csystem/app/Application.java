@@ -1,11 +1,11 @@
 package org.csystem.app;
 
-import org.csystem.app.reflection.ReflectionApp;
-import org.csystem.app.reflection.RepeatableAnnotation;
+import org.csystem.app.methodreferance.MethodReferenceApp;
 
 class Application {
     public static void run(String[] args)
     {
-        RepeatableAnnotation.run();
+//        IteratorEx.run();
+        MethodReferenceApp.run();
     }
 }
