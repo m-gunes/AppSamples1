@@ -38,7 +38,7 @@
     <dependencies>
         <dependency>
             <groupId>org.csystem</groupId>
-            <artifactId>org-csystem-util-collection</artifactId>
+            <artifactId>org-csystem-generator</artifactId>
             <version>1.0.0</version>
         </dependency>
         <dependency>
