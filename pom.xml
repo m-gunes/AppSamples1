@@ -60,6 +60,12 @@
 
         <dependency>
             <groupId>org.csystem</groupId>
+            <artifactId>org-csystem-math</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.csystem</groupId>
             <artifactId>org-csystem-diagnostics</artifactId>
             <version>1.0.0</version>
         </dependency>
