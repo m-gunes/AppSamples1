@@ -27,6 +27,16 @@ public class Covariance {
             System.out.println(n);
 
     }
+
+    private static void covariantArray()
+    {
+        // Java'da referans dizileri covariance özelliktedir.
+        String [] str = {"ankara", "istanbul", "izmir"};
+        Object [] objs = str;
+
+        for (var s : objs)
+            System.out.println(s);
+    }
 }
 
 
