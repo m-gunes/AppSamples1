@@ -1,4 +1,4 @@
-package org.csystem.app.collections.iterator;
+package org.csystem.app.iterator;
 
 import com.karandev.io.util.console.Console;
 import lombok.extern.slf4j.Slf4j;
