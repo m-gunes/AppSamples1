@@ -1,11 +1,10 @@
 package org.csystem.app;
 
-import org.csystem.app.optional.OptionalApp;
-import org.csystem.app.optional.OptionalParamUsage;
+import org.csystem.app.collections.AddAll;
 
 class Application {
     public static void run(String[] args)
     {
-        OptionalParamUsage.run();
+        AddAll.run();
     }
 }
