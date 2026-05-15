@@ -1,10 +1,10 @@
 package org.csystem.app;
 
-import org.csystem.app.annotations.suppresswarnings.SuppressWarningsApp;
+import org.csystem.app.collections.arraydeque.DeviceApp;
 
 class Application {
     public static void run(String[] args)
     {
-        SuppressWarningsApp.run();
+        DeviceApp.run();
     }
 }
