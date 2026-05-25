@@ -1,12 +1,10 @@
 package org.csystem.app;
 
-import org.csystem.app.collections.arraydeque.DeviceApp;
-import org.csystem.app.collections.setinterface.treeset.TreeSetApp;
-import org.csystem.app.game.lottery.NumericLotteryApp;
+import org.csystem.app.collections.setinterface.hashset.HashSetApp;
 
 class Application {
     public static void run(String[] args)
     {
-        TreeSetApp.run();
+        HashSetApp.run();
     }
 }
