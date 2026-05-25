@@ -22,7 +22,7 @@ public class NumericLotteryApp {
             }
 
             while (n-- > 0)
-                ArrayUtil.print(numericLottery.getNumbers(), 2);
+                ArrayUtil.print(numericLottery.getNumbersWithTreeSet(), 2);
         }
     }
 }

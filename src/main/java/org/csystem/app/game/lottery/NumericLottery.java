@@ -1,5 +1,6 @@
 package org.csystem.app.game.lottery;
 
+import java.util.TreeSet;
 import java.util.random.RandomGenerator;
 
 /*----------------------------------------------------------------------------------------------------------------
@@ -17,7 +18,7 @@ public class NumericLottery {
         m_randomGenerator = randomGenerator;
     }
 
-    public boolean [] getFlags()
+    private boolean [] getFlags()
     {
         boolean [] flags = new boolean[50];
         for(int i = 0; i < 6; ++i) {
@@ -32,7 +33,7 @@ public class NumericLottery {
         return flags;
     }
 
-    public int [] getNumbers(boolean [] flags)
+    private int [] getNumbers(boolean [] flags)
     {
         int [] a = new int[6];
         int idx = 0;
@@ -47,6 +48,24 @@ public class NumericLottery {
     public int [] getNumbers()
     {
         return getNumbers(getFlags());
+    }
+
+
+    /// v2 starts
+
+    public int [] getNumbersWithTreeSet()
+    {
+        var numbers = new int[6];
+        var treeSet = new TreeSet<Integer>();
+
+        while (treeSet.size() != 6)
+            treeSet.add(m_randomGenerator.nextInt(1, 50));
+
+        int i = 0;
+        for (var val : treeSet)
+            numbers[i++] = val;
+
+        return numbers;
     }
 
 }
