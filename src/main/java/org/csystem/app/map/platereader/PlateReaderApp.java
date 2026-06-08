@@ -1,10 +1,6 @@
 package org.csystem.app.map.platereader;
 
 import com.karandev.io.util.console.Console;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.experimental.Accessors;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -70,12 +66,3 @@ public class PlateReaderApp {
 }
 
 
-
-@Getter
-@Setter
-@Accessors(prefix = "m_")
-@Builder
-class CarInfo {
-    private String m_plate;
-    private LocalDateTime m_date;
-}
