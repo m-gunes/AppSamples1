@@ -30,14 +30,13 @@ import java.util.*;
  *
  */
 
-
 public class StringMap<V> implements IStringMap<V> {
-    private final HashMap<String, V> m_stringMap = new HashMap<>();
+    private final Map<String, V> m_stringMap = new HashMap<>();
 
-    private static void requireNonNullOrNonBlank(String key)
+    private static void throwIfKeyNullOrBlank(String key)
     {
         if (key == null || key.isBlank())
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Key can not be null or blank");
     }
 
     @Override
@@ -49,34 +48,27 @@ public class StringMap<V> implements IStringMap<V> {
     @Override
     public boolean addElement(String key, V value)
     {
-        requireNonNullOrNonBlank(key);
+        throwIfKeyNullOrBlank(key);
+        boolean exists = m_stringMap.containsKey(key);
+        m_stringMap.put(key, value);
 
-        if (m_stringMap.containsKey(key)) {
-            m_stringMap.put(key, value);
-            return true;
-        } else {
-            m_stringMap.put(key, value);
-            return false;
-        }
+        return exists;
     }
 
     @Override
     public boolean removeElement(String key)
     {
-        requireNonNullOrNonBlank(key);
+        throwIfKeyNullOrBlank(key);
+        boolean exists = m_stringMap.containsKey(key);
+        m_stringMap.remove(key);
 
-        if (m_stringMap.containsKey(key)) {
-            m_stringMap.remove(key);
-            return true;
-        }
-        else
-            return false;
+        return exists;
     }
 
     @Override
     public Optional<V> getValue(String key)
     {
-        requireNonNullOrNonBlank(key);
+        throwIfKeyNullOrBlank(key);
 
         return Optional.ofNullable(m_stringMap.get(key));
     }
@@ -84,9 +76,7 @@ public class StringMap<V> implements IStringMap<V> {
     @Override
     public V getValue(String key, V defaultValue)
     {
-        requireNonNullOrNonBlank(key);
-        var values = m_stringMap.get(key);
-
-        return values == null ? defaultValue : values;
+        throwIfKeyNullOrBlank(key);
+        return m_stringMap.getOrDefault(key, defaultValue);
     }
 }
