@@ -1,11 +1,10 @@
 package org.csystem.app;
 
-import org.csystem.app.collections.setinterface.hashset.HashSetApp;
-import org.csystem.app.map.platereader.PlateReaderApp;
+import org.csystem.app.streams.StreamApp;
 
 class Application {
     public static void run(String[] args)
     {
-        PlateReaderApp.run();
+        StreamApp.run(args);
     }
 }
