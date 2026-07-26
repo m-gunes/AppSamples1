@@ -205,6 +205,17 @@ public class StreamApp {
         }
     }
 
+    enum DAY_OF_WEEK {
+        SUN, MON, TUE, WED, THU, FRI, SAT;
+        public static boolean isDayOfWeek(String s)
+        {
+            for (DAY_OF_WEEK day : values())
+                if (s.equals(day.toString()))
+                    return true;
+            return false;
+        }
+    }
+
     // 7. Aşağıdaki demo örnekte komut satırından alınan SUN, MON, TUE, WED, THU, FRI, SAT biçimindeki yazılardan
     // biri şeklinde alınan haftanın günü bilgisine göre ilgili günde izni olan çalışanlar listelenmektedir.
     // Örnekte alınan değerlerin geçerliliği kontrol edilmektedir. Değerler yalnızca belirtildiği gibi alınabilmektedir.
@@ -215,8 +226,15 @@ public class StreamApp {
             var staffs = StaffFactory.loadFromTextFile(args[0]).getStaffAsArray();
             var restWeekDay = args[1].trim().toUpperCase();
 
-            if (restWeekDay.length() != 3)
+            if (restWeekDay.length() != 3) {
+                Console.writeLine("Invalid lenght");
                 return;
+            }
+
+            if (!DAY_OF_WEEK.isDayOfWeek(restWeekDay)) {
+                Console.writeLine("Invalid day of week");
+                return;
+            }
 
             Arrays.stream(staffs)
                     .filter(s -> s.getRestDay().toString().startsWith(restWeekDay))
@@ -233,7 +251,5 @@ public class StreamApp {
         }
 
     }
-
-
 
 }
