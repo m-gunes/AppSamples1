@@ -3,6 +3,9 @@ package org.csystem.app.streams;
 import com.karandev.io.util.console.Console;
 import org.csystem.util.datasource.factory.ProductFactory;
 import org.csystem.util.datasource.factory.StaffFactory;
+import org.csystem.util.datasource.staff.StaffInfo;
+import org.csystem.util.datasource.staff.StaffNameAgeDTO;
+import org.csystem.util.datasource.staff.StaffNameRestDayDTO;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -24,7 +27,9 @@ public class StreamApp {
 //        getBetweenDates(args);
 //        getBetweenYears(args);
 //        getStaffsOnLeave(args);
-        getStaffsOnLeaveWithShortcut(args);
+//        getStaffsOnLeaveWithShortcut(args);
+//        getStaffNameBetweenDates(args);
+        getStuffNameAndRestDayBetweenDates(args);
     }
 
     private static void firstEx(String[] args)
@@ -205,15 +210,16 @@ public class StreamApp {
         }
     }
 
-    enum DAY_OF_WEEK {
-        SUN, MON, TUE, WED, THU, FRI, SAT;
-        public static boolean isDayOfWeek(String s)
-        {
-            for (DAY_OF_WEEK day : values())
-                if (s.equals(day.toString()))
-                    return true;
+    private static boolean isValid(String restDay)
+    {
+        if (restDay.length() != 3)
             return false;
-        }
+
+        for (var dow : DayOfWeek.values())
+            if (dow.toString().contains(restDay))
+                return true;
+
+        return false;
     }
 
     // 7. Aşağıdaki demo örnekte komut satırından alınan SUN, MON, TUE, WED, THU, FRI, SAT biçimindeki yazılardan
@@ -224,21 +230,15 @@ public class StreamApp {
         try {
             checkLengthEquals(args.length, 2, "Wrong number of arguments");
             var staffs = StaffFactory.loadFromTextFile(args[0]).getStaffAsArray();
-            var restWeekDay = args[1].trim().toUpperCase();
 
-            if (restWeekDay.length() != 3) {
-                Console.writeLine("Invalid lenght");
-                return;
+            if (isValid(args[1])) {
+                Arrays.stream(staffs)
+                        .filter(s -> s.getRestDay().toString().startsWith(args[1]))
+                        .forEach(Console::writeLine);
             }
+            else
+                Console.writeLine("Wrong rest day");
 
-            if (!DAY_OF_WEEK.isDayOfWeek(restWeekDay)) {
-                Console.writeLine("Invalid day of week");
-                return;
-            }
-
-            Arrays.stream(staffs)
-                    .filter(s -> s.getRestDay().toString().startsWith(restWeekDay))
-                    .forEach(Console::writeLine);
         }
         catch (IllegalArgumentException ignore) {
             Console.Error.writeLine("Invalid weekday format");
@@ -252,4 +252,128 @@ public class StreamApp {
 
     }
 
+    // Aşağıdaki demo örnekte komut satırından alınan minDate ve maxDate değerlerine göre (minDate, maxDate) aralığında doğan
+    // çalışanların isimleri listelenmiştir
+    private static void getStaffNameBetweenDates(String [] args)
+    {
+        try {
+            checkLengthEquals(args.length, 3, "Wrong number of arguments");
+            var staffs = StaffFactory.loadFromTextFile(args[0]).getStaffAsArray();
+            var formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+            var minDate = LocalDate.parse(args[1], formatter);
+            var maxDate = LocalDate.parse(args[2], formatter);
+
+            Arrays.stream(staffs)
+                    .filter(s -> s.getBirthDate().isAfter(minDate))
+                    .filter(s -> s.getBirthDate().isBefore(maxDate))
+//                    .forEach(s -> Console.writeLine(s.getName()));
+                    .map(StaffInfo::getName)
+                    .forEach(Console::writeLine);
+
+        }
+        catch (DateTimeParseException ignore) {
+            Console.Error.writeLine("Invalid date format");
+        }
+        catch (IOException e) {
+            Console.Error.writeLine("IO Error occurred :%s", e.getMessage());
+        }
+        catch (Exception e) {
+            Console.Error.writeLine("Error occurred :%s", e.getMessage());
+        }
+    }
+
+    // Aşağıdaki demo örnekte komut satırından alınan minDate ve maxDate değerlerine göre (minDate, maxDate) aralığında doğan
+    // çalışanların yaşları listelenmiştir
+    private static void getStaffAgeBetweenDates(String [] args)
+    {
+        try {
+            checkLengthEquals(args.length, 3, "Wrong number of arguments");
+            var staffs = StaffFactory.loadFromTextFile(args[0]).getStaffAsArray();
+            var formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+            var minDate = LocalDate.parse(args[1], formatter);
+            var maxDate = LocalDate.parse(args[2], formatter);
+
+            Arrays.stream(staffs)
+                    .filter(s -> s.getBirthDate().isAfter(minDate))
+                    .filter(s -> s.getBirthDate().isBefore(maxDate))
+                    .mapToDouble(StaffInfo::getAge)
+                    .forEach(Console::writeLine);
+            // Buradaki map te kutulama maliyeti var. Stream<Double> 'a geri donuyor
+            // Bir generic turun temel turler icin karsiligi neden vardir?
+            // kutulama maliyetini engellemektir!
+
+            // mapToDouble, DoubleStream verdigi icin artik kutulama maliyeti yok
+            // artik elimdeki stream arka planda double tutuyor
+            // mesela DoubleStream den bu yaslarin toplamini bulabiliriz
+            // Eger Stream 'in double acilimindan (Stream<Double>) gidersek unboxing yapilacak, oyle hesaplanacak.
+            // NOT: Generic ler temel turlerden acilamiyor.
+
+        }
+        catch (DateTimeParseException ignore) {
+            Console.Error.writeLine("Invalid date format");
+        }
+        catch (IOException e) {
+            Console.Error.writeLine("IO Error occurred :%s", e.getMessage());
+        }
+        catch (Exception e) {
+            Console.Error.writeLine("Error occurred :%s", e.getMessage());
+        }
+    }
+
+
+    // Aşağıdaki demo örnekte komut satırından alınan `minDate` ve `maxDate` değerlerine göre `(minDate, maxDate)` aralığında doğan çalışanların
+    // isimleri ve yaşları DTO kullanılarak listelenmiştir
+    private static void getStuffNameAndAgeBetweenDates(String [] args)
+    {
+        try {
+            checkLengthEquals(args.length, 3, "Wrong number of arguments");
+            var staffs = StaffFactory.loadFromTextFile(args[0]).getStaffAsArray();
+            var formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+            var minDate = LocalDate.parse(args[1], formatter);
+            var maxDate = LocalDate.parse(args[2], formatter);
+
+            Arrays.stream(staffs)
+                    .filter(s -> s.getBirthDate().isAfter(minDate))
+                    .filter(s -> s.getBirthDate().isBefore(maxDate))
+                    .map(s -> new StaffNameAgeDTO(s.getName(), s.getAge()))
+                    .forEach(Console::writeLine);
+        }
+        catch (DateTimeParseException ignore) {
+            Console.Error.writeLine("Invalid date format");
+        }
+        catch (IOException e) {
+            Console.Error.writeLine("IO Error occurred :%s", e.getMessage());
+        }
+        catch (Exception e) {
+            Console.Error.writeLine("Error occurred :%s", e.getMessage());
+        }
+    }
+
+    // Aşağıdaki demo örnekte komut satırından alınan minDate ve maxDate değerlerine göre (minDate, maxDate) aralığında doğan çalışanların
+    // isimleri ve izin günleri DTO kullanılarak listelenmiştir
+    private static void getStuffNameAndRestDayBetweenDates(String [] args)
+    {
+        try {
+            checkLengthEquals(args.length, 3, "Wrong number of arguments");
+            var staffs = StaffFactory.loadFromTextFile(args[0]).getStaffAsArray();
+            var formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+            var minDate = LocalDate.parse(args[1], formatter);
+            var maxDate = LocalDate.parse(args[2], formatter);
+
+            Arrays.stream(staffs)
+                    .filter(s -> s.getBirthDate().isAfter(minDate))
+                    .filter(s -> s.getBirthDate().isBefore(maxDate))
+                    .map(s -> new StaffNameRestDayDTO(s.getName(), s.getRestDay()))
+                    .forEach(Console::writeLine);
+        }
+        catch (DateTimeParseException ignore) {
+            Console.Error.writeLine("Invalid date format");
+        }
+        catch (IOException e) {
+            Console.Error.writeLine("IO Error occurred :%s", e.getMessage());
+        }
+        catch (Exception e) {
+            Console.Error.writeLine("Error occurred :%s", e.getMessage());
+        }
+    }
 }
