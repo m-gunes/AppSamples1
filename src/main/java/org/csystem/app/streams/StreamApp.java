@@ -229,9 +229,9 @@ public class StreamApp {
     {
         try {
             checkLengthEquals(args.length, 2, "Wrong number of arguments");
-            var staffs = StaffFactory.loadFromTextFile(args[0]).getStaffAsArray();
 
             if (isValid(args[1])) {
+                var staffs = StaffFactory.loadFromTextFile(args[0]).getStaffAsArray();
                 Arrays.stream(staffs)
                         .filter(s -> s.getRestDay().toString().startsWith(args[1]))
                         .forEach(Console::writeLine);
