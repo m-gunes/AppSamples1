@@ -1,10 +1,10 @@
 package org.csystem.app;
 
-import org.csystem.app.streams.StreamApp2;
+import org.csystem.app.streams.FindFirstAndFindAnyEx;
 
 class Application {
     public static void run(String[] args)
     {
-        StreamApp2.run(args);
+        FindFirstAndFindAnyEx.run(args);
     }
 }

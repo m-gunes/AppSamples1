@@ -222,6 +222,7 @@ public class StreamApp2 {
         }
     }
 
+    // takeWhile
     // Aşağıdaki örnekte klavyeden sıfır girilene kadar alınan pozitif sayıların kaç tane olduğu bilgisi elde edilmiştir
     private static void printCountEnteredNumber()
     {
