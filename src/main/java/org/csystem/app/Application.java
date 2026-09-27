@@ -1,10 +1,10 @@
 package org.csystem.app;
 
-import org.csystem.app.streams.RangeEx;
+import org.csystem.app.streams.IterateEx;
 
 class Application {
     public static void run(String[] args)
     {
-        RangeEx.run(args);
+        IterateEx.run(args);
     }
 }
