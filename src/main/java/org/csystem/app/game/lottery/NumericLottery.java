@@ -2,6 +2,7 @@ package org.csystem.app.game.lottery;
 
 import java.util.TreeSet;
 import java.util.random.RandomGenerator;
+import java.util.stream.IntStream;
 
 /*----------------------------------------------------------------------------------------------------------------
 Sınıf Çalışması: Sayısal loto kupon üreten programı yazınız.
@@ -66,6 +67,12 @@ public class NumericLottery {
             numbers[i++] = val;
 
         return numbers;
+    }
+
+    /// v3
+    public int [] getNumbersWithStream()
+    {
+        return m_randomGenerator.ints(1, 50).distinct().limit(6).toArray();
     }
 
 }
