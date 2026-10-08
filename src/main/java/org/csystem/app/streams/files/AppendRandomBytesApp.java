@@ -81,8 +81,4 @@ public class AppendRandomBytesApp {
         }
     }
 
-    public static void main(String[] args)
-    {
-        run(args);
-    }
 }

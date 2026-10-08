@@ -89,9 +89,4 @@ public class ReadBytesViaChunkApp {
             Console.Error.writeLine("Error occurred:%s", e.getMessage());
         }
     }
-
-    public static void main(String[] args)
-    {
-        run(args);
-    }
 }
